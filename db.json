@@ -1,16 +1,10 @@
 {
   "todos": [
     {
-      "id": 1702656534821,
-      "title": "우우우",
-      "contents": "쓰레깅",
-      "isDone": 1
-    },
-    {
       "id": 1702656861268,
       "title": "우우우",
       "contents": "배신자",
-      "isDone": 0
+      "isDone": 1
     }
   ]
 }
