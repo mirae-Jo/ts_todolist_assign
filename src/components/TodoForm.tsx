@@ -1,10 +1,27 @@
 import React, { useState } from 'react';
 import useInput from '../hooks/useInput';
+import { EIsDone } from '../types/types';
+import { useAppDispatch } from '../app/hooks';
+import { addTodo, postTodo } from '../redux/modules/todosSlice';
 
-interface IProps {
-  onSubmitToDo: (e: React.FormEvent<HTMLFormElement>) => void;
-}
-const TodoForm = ({ onSubmitToDo }: IProps) => {
+const TodoForm = () => {
+  const dispatch = useAppDispatch();
+  const onSubmitToDo = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const target = e.target as HTMLFormElement;
+    const title = (target[0] as HTMLInputElement).value;
+    const contents = (target[1] as HTMLInputElement).value;
+
+    const newToDo = {
+      id: Date.now(),
+      title,
+      contents,
+      isDone: EIsDone.UN_DONE
+    };
+    // setToDos((prev) => [newToDo, ...prev!]);
+    dispatch(postTodo(newToDo));
+  };
+
   const [title, setTitle] = useInput();
   const [contents, SetContents] = useInput();
   return (
