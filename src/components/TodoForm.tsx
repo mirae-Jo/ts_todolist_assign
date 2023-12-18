@@ -2,9 +2,21 @@ import React, { useState } from 'react';
 import useInput from '../hooks/useInput';
 import { EIsDone } from '../types/types';
 import { useAppDispatch } from '../app/hooks';
-import { addTodo, postTodo } from '../redux/modules/todosSlice';
+import { postTodo } from '../redux/modules/todosSlice';
+import { QueryClient, useMutation, useQueryClient } from 'react-query';
+import { addTodo } from '../api/todos';
 
 const TodoForm = () => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation(addTodo, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('todos');
+    }
+  });
+
+  const [title, setTitle, clearTitle] = useInput();
+  const [contents, SetContents, clearContents] = useInput();
+
   const dispatch = useAppDispatch();
   const onSubmitToDo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,11 +31,14 @@ const TodoForm = () => {
       isDone: EIsDone.UN_DONE
     };
     // setToDos((prev) => [newToDo, ...prev!]);
-    dispatch(postTodo(newToDo));
+    // dispatch(postTodo(newToDo));
+    mutation.mutate(newToDo);
+    clearTitle();
+    clearContents();
+    const titleInput: HTMLInputElement = target[0] as HTMLInputElement;
+    titleInput.focus();
   };
 
-  const [title, setTitle] = useInput();
-  const [contents, SetContents] = useInput();
   return (
     <div>
       <form onSubmit={onSubmitToDo}>

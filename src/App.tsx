@@ -5,12 +5,15 @@ import { store } from './app/store';
 import { QueryClientProvider } from 'react-query';
 import { QueryClient } from 'react-query';
 
-const queryClient = new QueryClient();
 function App() {
+  const queryClient = new QueryClient();
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <Home />
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <Home />
+      </QueryClientProvider>
+    </Provider>
   );
 }
 
