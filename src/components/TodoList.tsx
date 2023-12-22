@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 import { EIsDone, TTodo } from '../types/types';
 import TodoItem from './TodoItem';
-import { doneTodo, removeTodo } from '../redux/modules/todosSlice';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { delTodo, getTodos, updateTodo } from '../api/todos';
+
 import { useRecoilState } from 'recoil';
 import { todoState } from '../atom/todos';
 
