@@ -16,7 +16,7 @@
       "id": 1702912196989,
       "title": "이진호",
       "contents": "천재",
-      "isDone": 0
+      "isDone": 1
     },
     {
       "id": 1702912202440,
@@ -40,43 +40,13 @@
       "id": 1702912415051,
       "title": "알려줘",
       "contents": "ㅜㅜㅜ",
-      "isDone": 0
-    },
-    {
-      "id": 1702912629333,
-      "title": "송용승",
-      "contents": "천재",
-      "isDone": 0
-    },
-    {
-      "id": 1702912633938,
-      "title": "송용승",
-      "contents": "바보",
-      "isDone": 0
+      "isDone": 1
     },
     {
       "id": 1702912637765,
       "title": "이진호",
       "contents": "천재",
       "isDone": 1
-    },
-    {
-      "id": 1702912794101,
-      "title": "ㅁㄴㅇㄹ",
-      "contents": "ㅁㄴㅇㄹ",
-      "isDone": 0
-    },
-    {
-      "id": 1702912804652,
-      "title": "쩐다",
-      "contents": "ㄷㄷ",
-      "isDone": 0
-    },
-    {
-      "id": 1702912807826,
-      "title": "쩐당",
-      "contents": "ㄷㄷ",
-      "isDone": 0
     }
   ]
 }

@@ -5,14 +5,18 @@ import { useAppDispatch } from '../app/hooks';
 import { postTodo } from '../redux/modules/todosSlice';
 import { QueryClient, useMutation, useQueryClient } from 'react-query';
 import { addTodo } from '../api/todos';
+import { useRecoilState } from 'recoil';
+import { todoState } from '../atom/todos';
 
 const TodoForm = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation(addTodo, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('todos');
-    }
-  });
+  // const queryClient = useQueryClient();
+  // const mutation = useMutation(addTodo, {
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries('todos');
+  //   }
+  // });
+
+  const [todos, setTodos] = useRecoilState(todoState);
 
   const [title, setTitle, clearTitle] = useInput();
   const [contents, SetContents, clearContents] = useInput();
@@ -32,7 +36,8 @@ const TodoForm = () => {
     };
     // setToDos((prev) => [newToDo, ...prev!]);
     // dispatch(postTodo(newToDo));
-    mutation.mutate(newToDo);
+    // mutation.mutate(newToDo);
+    setTodos((prev) => [newToDo, ...prev!]);
     clearTitle();
     clearContents();
     const titleInput: HTMLInputElement = target[0] as HTMLInputElement;

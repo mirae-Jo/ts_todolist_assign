@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import { QueryClientProvider } from 'react-query';
 import { QueryClient } from 'react-query';
+import { RecoilRoot } from 'recoil';
 
 function App() {
   const queryClient = new QueryClient();
@@ -11,7 +12,9 @@ function App() {
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        <Home />
+        <RecoilRoot>
+          <Home />
+        </RecoilRoot>
       </QueryClientProvider>
     </Provider>
   );
