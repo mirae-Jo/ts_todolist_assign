@@ -6,23 +6,24 @@ import { useRecoilState } from 'recoil';
 import { todoState } from '../atom/todos';
 
 const TodoList = () => {
-  // const queryClient = useQueryClient();
-  // const delMutation = useMutation(delTodo, {
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries('todos');
-  //   }
-  // });
-  // const updateMutation = useMutation(updateTodo, {
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries('todos');
-  //   }
-  // });
-  // const { isLoading, isError, data } = useQuery('todos', getTodos);
-  const [data] = useRecoilState(todoState);
+  const [data, setData] = useRecoilState(todoState);
 
-  const handleUpdateToDo = ({ id, isDone }: { id: number; isDone: number }) => {};
+  const handleUpdateToDo = (id: number) => {
+    setData((prev) => {
+      // map 함수의 결과를 반환
+      return prev.map((todo) => {
+        return todo.id === id ? { ...todo, isDone: !todo.isDone ? EIsDone.DONE : EIsDone.UN_DONE } : todo;
+      });
+    });
+  };
 
-  const handleDeleteToDo = (id: number) => {};
+  const handleDeleteToDo = (id: number) => {
+    setData((prev) => {
+      return prev.filter((todo) => {
+        return todo.id !== id;
+      });
+    });
+  };
 
   return (
     <>
@@ -37,8 +38,8 @@ const TodoList = () => {
               <TodoItem
                 key={todo.id}
                 todo={todo}
-                handleUpdateToDo={() => handleUpdateToDo({ id: todo.id, isDone: todo.isDone })}
-                handleDeleteToDo={() => handleDeleteToDo(todo.id)}
+                handleUpdateToDo={handleUpdateToDo}
+                handleDeleteToDo={handleDeleteToDo}
               />
             ))}
       </ul>
@@ -53,8 +54,8 @@ const TodoList = () => {
               <TodoItem
                 key={todo.id}
                 todo={todo}
-                handleUpdateToDo={() => handleUpdateToDo({ id: todo.id, isDone: todo.isDone })}
-                handleDeleteToDo={() => handleDeleteToDo(todo.id)}
+                handleUpdateToDo={handleUpdateToDo}
+                handleDeleteToDo={handleDeleteToDo}
               />
             ))}
       </ul>
